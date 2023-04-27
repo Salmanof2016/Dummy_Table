@@ -33,39 +33,54 @@
 //     })
 // })
 
+// $(document).ready(function () {
+//
+//     // get Method
+//     let csrf = $("input[name=csrfmiddlewaretoken]").val();
+//
+//     $('.btn').click(function () {
+//         $.ajax({
+//             url: '',
+//             type: 'get',
+//             data: {
+//                 button_text: $(this).text()
+//             },
+//             success: function (response) {
+//                 $(".btn").text(response.seconds)
+//                 $("#tr_add").append('<th>'+ response.seconds + '</th>')
+//             }
+//         });
+//     });
+//
+//     // post method
+//     $('#tr_add').on('click' , 'th' , function (){
+//         $.ajax({
+//             url: '',
+//             type: 'post',
+//             data: {
+//                 text: $(this).text(),
+//                 csrfmiddlewaretoken: csrf
+//             },
+//             success: function(response){
+//                 $('.down').append('<li>' + response.data + '</li>')
+//             }
+//         })
+//     })
+//
+// });
+
 $(document).ready(function () {
-
-    // get Method
-    let csrf = $("input[name=csrfmiddlewaretoken]").val();
-
-    $('.btn').click(function () {
+    setInterval(function () {
         $.ajax({
-            url: '',
-            type: 'get',
-            data: {
-                button_text: $(this).text()
+            type : 'GET',
+            url : '/getFormData/',
+            success : function (response){
+                console.log(response)
             },
-            success: function (response) {
-                $(".btn").text(response.seconds)
-                $("#tr_add").append('<th>'+ response.seconds + '</th>')
-            }
-        });
-    });
-
-    // post method
-    $('#tr_add').on('click' , 'th' , function (){
-        $.ajax({
-            url: '',
-            type: 'post',
-            data: {
-                text: $(this).text(),
-                csrfmiddlewaretoken: csrf
-            },
-            success: function(response){
-                $('.down').append('<li>' + response.data + '</li>')
+            error : function (response){
+              alert('Error getting data')
             }
         })
-    })
-
-});
+    },1000)
+})
 
